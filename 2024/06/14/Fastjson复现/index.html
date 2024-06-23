@@ -20,19 +20,19 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="常见的文件头1、图片 JPEG 文件头：FF D8 FF  文件尾：FF D9 TGA 未压缩的前4字节 00 00 02 00 RLE压缩的前5字节 00 00 10 00 00 PNG 文件头：89 50 4E 47 0D 0A 1A 0A  文件尾：AE 42 60 82 GIF 文件头：47 49 46 38 39(37) 61  文件尾：00 3B BMP 文件头：42 4D 文件头标">
+  <meta name="description" content="让学习成为美好体验">
 <meta property="og:type" content="article">
-<meta property="og:title" content="热烈的爆炒菜花">
-<meta property="og:url" content="http://example.com/2023/02/11/%E5%B8%B8%E8%A7%81%E7%9A%84%E6%96%87%E4%BB%B6%E5%A4%B4/index.html">
+<meta property="og:title" content="Fastjson复现">
+<meta property="og:url" content="http://example.com/2024/06/14/Fastjson%E5%A4%8D%E7%8E%B0/index.html">
 <meta property="og:site_name" content="热烈的爆炒菜花">
-<meta property="og:description" content="常见的文件头1、图片 JPEG 文件头：FF D8 FF  文件尾：FF D9 TGA 未压缩的前4字节 00 00 02 00 RLE压缩的前5字节 00 00 10 00 00 PNG 文件头：89 50 4E 47 0D 0A 1A 0A  文件尾：AE 42 60 82 GIF 文件头：47 49 46 38 39(37) 61  文件尾：00 3B BMP 文件头：42 4D 文件头标">
+<meta property="og:description" content="让学习成为美好体验">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-02-11T04:12:55.048Z">
-<meta property="article:modified_time" content="2023-02-09T07:01:42.747Z">
+<meta property="article:published_time" content="2024-06-14T07:12:21.000Z">
+<meta property="article:modified_time" content="2024-06-14T07:29:11.551Z">
 <meta property="article:author" content="菜花">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/2023/02/11/%E5%B8%B8%E8%A7%81%E7%9A%84%E6%96%87%E4%BB%B6%E5%A4%B4/">
+<link rel="canonical" href="http://example.com/2024/06/14/Fastjson%E5%A4%8D%E7%8E%B0/">
 
 
 <script id="page-configurations">
@@ -45,7 +45,7 @@
   };
 </script>
 
-  <title> | 热烈的爆炒菜花</title>
+  <title>Fastjson复现 | 热烈的爆炒菜花</title>
   
 
 
@@ -150,7 +150,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/02/11/%E5%B8%B8%E8%A7%81%E7%9A%84%E6%96%87%E4%BB%B6%E5%A4%B4/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/06/14/Fastjson%E5%A4%8D%E7%8E%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -163,7 +163,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          
+          Fastjson复现
         </h1>
 
         <div class="post-meta">
@@ -172,16 +172,10 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2023-02-11 12:12:55" itemprop="dateCreated datePublished" datetime="2023-02-11T12:12:55+08:00">2023-02-11</time>
+              <time title="创建时间：2024-06-14 15:12:21 / 修改时间：15:29:11" itemprop="dateCreated datePublished" datetime="2024-06-14T15:12:21+08:00">2024-06-14</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-02-09 15:01:42" itemprop="dateModified" datetime="2023-02-09T15:01:42+08:00">2023-02-09</time>
-              </span>
 
           
 
@@ -194,61 +188,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <hr>
-<h1 id="常见的文件头"><a href="#常见的文件头" class="headerlink" title="常见的文件头"></a>常见的文件头</h1><h2 id="1、图片"><a href="#1、图片" class="headerlink" title="1、图片"></a><strong>1、图片</strong></h2><ul>
-<li>JPEG 文件头：<code>FF D8 FF</code>  文件尾：<code>FF D9</code></li>
-<li>TGA 未压缩的前4字节 <code>00 00 02 00</code> RLE压缩的前5字节 <code>00 00 10 00 00</code></li>
-<li>PNG 文件头：<code>89 50 4E 47 0D 0A 1A 0A</code>  文件尾：<code>AE 42 60 82</code></li>
-<li>GIF 文件头：<code>47 49 46 38 39(37) 61</code>  文件尾：<code>00 3B</code></li>
-<li>BMP 文件头：<code>42 4D</code> 文件头标识(2 bytes) 42(B) 4D(M)</li>
-<li>TIFF (tif) 文件头：<code>49 49 2A 00</code></li>
-<li>ico 文件头：<code>00 00 01 00</code></li>
-<li>Adobe Photoshop (psd) 文件头：<code>38 42 50 53</code></li>
-</ul>
-<h2 id="2、office文件"><a href="#2、office文件" class="headerlink" title="2、office文件"></a><strong>2、office文件</strong></h2><ul>
-<li>MS Word&#x2F;Excel (xls.or.doc) 文件头：<code>D0 CF 11 E0</code></li>
-<li>MS Access (mdb) 文件头：<code>53 74 61 6E 64 61 72 64 20 4A</code></li>
-<li>WordPerfect (wpd) 文件头：<code>FF 57 50 43</code></li>
-<li>Adobe Acrobat (pdf) 文件头：<code>25 50 44 46 2D 31 2E</code></li>
-<li>application&#x2F;vnd.visio(vsd) 文件头：<code>D0 CF 11 E0 A1 B1 1A E1</code></li>
-<li>Email [thorough only] (eml) 文件头：<code>44 65 6C 69 76 65 72 79 2D 64 61 74 65 3A</code></li>
-<li>Outlook Express (dbx) 文件头：<code>CF AD 12 FE C5 FD 74 6F</code></li>
-<li>Outlook (pst) 文件头：<code>21 42 44 4E</code></li>
-<li>Rich Text Format (rtf) 文件头：<code>7B 5C 72 74 66</code></li>
-<li>txt 文件(txt) 文件头：Unicode：<code>FE FF</code> &#x2F; Unicode big endian：<code>FF FE</code> &#x2F; UTF-8：<code>EF BB BF</code> &#x2F;ANSI编码是没有文件头的</li>
-</ul>
-<h2 id="3、压缩包文件"><a href="#3、压缩包文件" class="headerlink" title="3、压缩包文件"></a><strong>3、压缩包文件</strong></h2><ul>
-<li>ZIP Archive (zip) 文件头：<code>50 4B 03 04</code> 文件尾：<code>50 4B</code></li>
-<li>RAR Archive (rar) 文件头：<code>52 61 72 21</code></li>
-</ul>
-<h2 id="4、音频文件"><a href="#4、音频文件" class="headerlink" title="4、音频文件"></a><strong>4、音频文件</strong></h2><ul>
-<li>Wave (wav) 文件头：<code>57 41 56 45</code></li>
-<li>audio(Audio) 文件头： <code>4D 54 68 64</code></li>
-<li>audio&#x2F;x-aac（aac）</li>
-<li>文件头：<code>FF F1(9)</code></li>
-</ul>
-<h2 id="5、视频文件"><a href="#5、视频文件" class="headerlink" title="5、视频文件"></a><strong>5、视频文件</strong></h2><ul>
-<li>AVI (avi) 文件头：<code>41 56 49 20</code></li>
-<li>Real Audio (ram) 文件头：<code>2E 72 61 FD</code></li>
-<li>Real Media (rm) 文件头：<code>2E 52 4D 46</code></li>
-<li>MPEG (mpg) 文件头：<code>00 00 01 BA(3)</code></li>
-<li>Quicktime (mov) 文件头：<code>6D 6F 6F 76</code></li>
-<li>Windows Media (asf) 文件头：<code>30 26 B2 75 8E 66 CF 11</code></li>
-<li>MIDI (mid) 文件头：<code>4D 54 68 64</code></li>
-</ul>
-<h2 id="6、代码文件"><a href="#6、代码文件" class="headerlink" title="6、代码文件"></a><strong>6、代码文件</strong></h2><ul>
-<li>XML (xml) 文件头：<code>3C 3F 78 6D 6C</code></li>
-<li>HTML (html) 文件头：<code>68 74 6D 6C 3E</code></li>
-<li>Quicken (qdf) 文件头：<code>AC 9E BD 8F</code></li>
-<li>Windows Password (pwl) 文件头：<code>E3 82 85 96</code></li>
-</ul>
-<h2 id="7、其他类型"><a href="#7、其他类型" class="headerlink" title="7、其他类型"></a><strong>7、其他类型</strong></h2><ul>
-<li>windows证书文件(der) 文件头：<code>30 82 03 C9</code></li>
-<li>CAD (dwg) 文件头：<code>41 43 31 30</code></li>
-<li>Windows Shortcut (lnk) 文件头：<code>4C 00 00 00</code></li>
-<li>Windows reg(reg) 文件头：<code>52 45 47 45 44 49 54 34</code></li>
-</ul>
-
+        
     </div>
 
     
@@ -263,11 +203,11 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2023/02/08/php%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89/" rel="prev" title="">
+    <a href="/2023/06/08/DC-5/" rel="prev" title="">
       <i class="fa fa-chevron-left"></i> 
     </a></div>
       <div class="post-nav-item">
-    <a href="/2023/06/08/DC-5/" rel="next" title="">
+    <a href="/2024/06/23/%E6%B5%8B%E8%AF%95/" rel="next" title="">
        <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
@@ -328,7 +268,6 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84%E6%96%87%E4%BB%B6%E5%A4%B4"><span class="nav-number">1.</span> <span class="nav-text">常见的文件头</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E5%9B%BE%E7%89%87"><span class="nav-number">1.1.</span> <span class="nav-text">1、图片</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81office%E6%96%87%E4%BB%B6"><span class="nav-number">1.2.</span> <span class="nav-text">2、office文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8C%85%E6%96%87%E4%BB%B6"><span class="nav-number">1.3.</span> <span class="nav-text">3、压缩包文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4%E3%80%81%E9%9F%B3%E9%A2%91%E6%96%87%E4%BB%B6"><span class="nav-number">1.4.</span> <span class="nav-text">4、音频文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5%E3%80%81%E8%A7%86%E9%A2%91%E6%96%87%E4%BB%B6"><span class="nav-number">1.5.</span> <span class="nav-text">5、视频文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6%E3%80%81%E4%BB%A3%E7%A0%81%E6%96%87%E4%BB%B6"><span class="nav-number">1.6.</span> <span class="nav-text">6、代码文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7%E3%80%81%E5%85%B6%E4%BB%96%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.7.</span> <span class="nav-text">7、其他类型</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
